@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "array.h"
-FILE * fptr;
 void menu() {
     printf("1- Intput Values\n");
     printf("2- Print Array\n");
@@ -43,32 +42,11 @@ int main() {
                 avg= calculateAverage(array);
                 printf("Average valute = %f\n", avg);
             case 6 :
-                fptr = fopen("letters.txt", "w+");
-                if (fptr == 0)
-                {
-                    exit(1);
-                }
-                for (int u = 0; u < SIZE ; ++u)
-                {
-                    fputc(array[u], fptr);
-                }
-
-                fclose(fptr);
-
+                fileenter(array);
                 puts("Zapisano tablice");
                 break;
             case 7 :
-                fptr = fopen("letters.txt", "r+");
-                fseek(fptr, 0, SEEK_SET);
-                printf("Oto zawartosc pliku:\n");
-                for (int i = 0; i < SIZE; i++)
-                {
-                    array [i] = fgetc(fptr);
-                    fseek(fptr, 0, SEEK_CUR);
-                    printf("%d", array [i]);
-                }
-                printf("\n");
-                fclose(fptr);
+          readFile(array);
                 break;
             case 8 :
                 break;
