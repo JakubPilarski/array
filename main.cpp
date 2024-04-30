@@ -1,64 +1,49 @@
 
-#include <iostream>
 #define SIZE 10
-
-void  enterValue(int *array){
-    printf("Input values to array:\n");
-    for (int i=0; i < SIZE; ++i) {
-        printf("array[%d] = ", i);
-        scanf("%d", &array[i]);
-    }
-}
+#include <stdio.h>
+#include <stdlib.h>
+#include "array.h"
 
 
-void printArray(int array[]) {
-    for (int i=0; i < SIZE; ++i) {
-        printf("array[%d] = %d\n", i, array[i]);
-    }
-}
-int findMaximumValue(int array[]) {
-    int max = array[0];
-    for (int i = 0; i < SIZE; ++i )
-    {
-        if(array[i] > max) max = array[i];
-    }
-    return max;
-}
-int findMiniumValue(int array[]){
-    int min = array[0];
-    for (int i = 0; i < SIZE; ++i )
-    {
-        if(array[i] < min) min = array[i];
-    }
-    return min;
-}
-float calculateAverage(int array[]){
-    int sum = 0;
-    for (int i = 0; i < SIZE; ++i ) {
-        sum = sum + array[i];
-    }
-    float avg = (float)sum / SIZE;
-    return avg;
+void menu() {
+    printf("1- Intput Values\n");
+    printf("2- Print Array\n");
+    printf("3- Find Maximum Value\n");
+    printf("4- Find Minium Value\n");
+    printf("5- Calculate Average\n");
+    printf("6- Stop Program\n");
 }
 
 int main() {
     int array[SIZE] = {1, 2, 3, 4, 5, 6, 7 ,8, 9, 10};
+    int option = 0;
+    int min;
+    int max;
+    float avg;
+    while(option!=6) {
+        menu();
+        printf("choice = ");
+        scanf("%d", &option);
+        switch(option){
+            case 1 :enterValue(array);
+                break;
+            case 2 :
+                printArray(array);
+                break;
+            case 3 :
+                max = findMaximumValue(array);
+                printf("maxmium value = %d\n",max);
+                break;
+            case 4 :
+                min = findMiniumValue(array);
+                printf("minium value = %d\n",min);
+                break;
+            case 5:
+                avg= calculateAverage(array);
+                printf("Average valute = %f\n", avg);
+            case 6 :
+                break;
+        }
+    }
 
-    enterValue(array);
-
-
-    printArray(array);
-
-
-    int max = findMaximumValue(array);
-    printf("maxmium value = %d\n",max);
-
-
-    int min = findMiniumValue(array);
-    printf("minium value = %d\n",min);
-
-    float avg= calculateAverage(array);
-    printf("Average valute = %f\n", avg);
-
-    return 0;
 }
