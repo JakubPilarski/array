@@ -3,15 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "array.h"
-
-
+FILE * fptr;
 void menu() {
     printf("1- Intput Values\n");
     printf("2- Print Array\n");
     printf("3- Find Maximum Value\n");
     printf("4- Find Minium Value\n");
     printf("5- Calculate Average\n");
-    printf("6- Stop Program\n");
+    printf("6- Enter to fail\n");
+    printf("7- Read  fail\n");
+    printf("8- Stop Program\n");
 }
 
 int main() {
@@ -20,7 +21,7 @@ int main() {
     int min;
     int max;
     float avg;
-    while(option!=6) {
+    while(option!=8) {
         menu();
         printf("choice = ");
         scanf("%d", &option);
@@ -42,7 +43,38 @@ int main() {
                 avg= calculateAverage(array);
                 printf("Average valute = %f\n", avg);
             case 6 :
+                fptr = fopen("letters.txt", "w+");
+                if (fptr == 0)
+                {
+                    exit(1);
+                }
+                for (int u = 0; u < SIZE ; ++u)
+                {
+                    fputc(array[u], fptr);
+                }
+
+                fclose(fptr);
+
+                puts("Zapisano tablice");
                 break;
+            case 7 :
+                fptr = fopen("letters.txt", "r+");
+                fseek(fptr, 0, SEEK_SET);
+                printf("Oto zawartosc pliku:\n");
+                for (int i = 0; i < SIZE; i++)
+                {
+                    array [i] = fgetc(fptr);
+                    fseek(fptr, 0, SEEK_CUR);
+                    printf("%d", array [i]);
+                }
+                printf("\n");
+                fclose(fptr);
+                break;
+            case 8 :
+                break;
+
+
+
         }
     }
 
