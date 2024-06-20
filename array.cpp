@@ -48,7 +48,8 @@ void fileenter(int array[])
     }
     for (int u = 0; u < SIZE ; ++u)
     {
-        fputc(array[u], fptr);
+        //fputc(array[u], fptr);
+        fprintf(fptr, "%d\n", array[u]);
     }
 
     fclose(fptr);
@@ -60,10 +61,10 @@ void readFile(int array[])
     printf("Oto zawartosc pliku:\n");
     for (int i = 0; i < SIZE; i++)
     {
-        array [i] = fgetc(fptr);
+        fscanf(fptr, "%d", &array[i]);
         fseek(fptr, 0, SEEK_CUR);
         printf("%d\n", array [i]);
     }
-    printf("\n");
     fclose(fptr);
+    printf("\n");
 }
